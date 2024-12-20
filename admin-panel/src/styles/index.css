@@ -127,7 +127,9 @@ body, html {
 }
 
 .logout-button {
-  position: absolute;
+  position: relative;
+  display: flex;
+  align-items: left;
   left: 10px;
   background-color: #e74c3c;
   border: none;
