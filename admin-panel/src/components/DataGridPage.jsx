@@ -1,19 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'; // Importez useState depuis React
 import '../styles/index.css';
 
 const DataGrid = ({ data, columns, onAdd, onEdit, onDelete }) => {
-  const [newRow, setNewRow] = useState(Array(columns.length).fill(''));
+  const [newRow, setNewRow] = useState({});
   const [editIndex, setEditIndex] = useState(null);
 
-  const handleInputChange = (index, value) => {
-    const newRowCopy = [...newRow];
-    newRowCopy[index] = value;
-    setNewRow(newRowCopy);
+  const handleInputChange = (key, value) => {
+    setNewRow((prevRow) => ({
+      ...prevRow,
+      [key]: value,
+    }));
   };
 
   const handleAdd = () => {
     onAdd(newRow);
-    setNewRow(Array(columns.length).fill(''));
+    setNewRow({});
   };
 
   const handleEdit = (index) => {
@@ -24,7 +25,7 @@ const DataGrid = ({ data, columns, onAdd, onEdit, onDelete }) => {
   const handleSaveEdit = (index) => {
     onEdit(index, newRow);
     setEditIndex(null);
-    setNewRow(Array(columns.length).fill(''));
+    setNewRow({});
   };
 
   const handleDelete = (index) => {
@@ -48,26 +49,34 @@ const DataGrid = ({ data, columns, onAdd, onEdit, onDelete }) => {
         <tbody>
           {data.map((row, rowIndex) => (
             <tr key={rowIndex}>
-              {row.map((cell, cellIndex) => (
-                <td key={cellIndex}>
+              {columns.map((column, columnIndex) => (
+                <td key={columnIndex}>
                   {editIndex === rowIndex ? (
                     <input
                       type="text"
-                      value={newRow[cellIndex]}
-                      onChange={(e) => handleInputChange(cellIndex, e.target.value)}
+                      value={newRow[column] || ''}
+                      onChange={(e) =>
+                        handleInputChange(column, e.target.value)
+                      }
                     />
                   ) : (
-                    cell
+                    row[column.toLowerCase()] // Utilise les noms de colonnes comme clés d'objet
                   )}
                 </td>
               ))}
               <td>
                 {editIndex === rowIndex ? (
-                  <button onClick={() => handleSaveEdit(rowIndex)}>Enregistrer</button>
+                  <button onClick={() => handleSaveEdit(rowIndex)}>
+                    Enregistrer
+                  </button>
                 ) : (
                   <>
-                    <button onClick={() => handleEdit(rowIndex)}>Modifier</button>
-                    <button onClick={() => handleDelete(rowIndex)}>Supprimer</button>
+                    <button onClick={() => handleEdit(rowIndex)}>
+                      Modifier
+                    </button>
+                    <button onClick={() => handleDelete(rowIndex)}>
+                      Supprimer
+                    </button>
                   </>
                 )}
               </td>
@@ -75,12 +84,14 @@ const DataGrid = ({ data, columns, onAdd, onEdit, onDelete }) => {
           ))}
           {editIndex === null && (
             <tr>
-              {newRow.map((cell, cellIndex) => (
-                <td key={cellIndex}>
+              {columns.map((column, columnIndex) => (
+                <td key={columnIndex}>
                   <input
                     type="text"
-                    value={cell}
-                    onChange={(e) => handleInputChange(cellIndex, e.target.value)}
+                    value={newRow[column] || ''}
+                    onChange={(e) =>
+                      handleInputChange(column, e.target.value)
+                    }
                   />
                 </td>
               ))}

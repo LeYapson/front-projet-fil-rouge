@@ -1,7 +1,7 @@
 // src/services/api.js
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8000/api'; // Remplacez par l'URL de votre back-end
+const API_URL = 'http://sugoiquiz-chan.test/api'; // Remplacez par l'URL de votre back-end
 
 const api = axios.create({
   baseURL: API_URL,
