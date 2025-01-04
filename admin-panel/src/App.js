@@ -1,11 +1,14 @@
 import React from 'react';
 import AppRoutes from './Routes';
+import { LoaderProvider } from './components/LoaderContext';
 import './styles/index.css';
 
 const App = () => {
   return (
     <div className="App">
-      <AppRoutes />
+      <LoaderProvider>
+        <AppRoutes />
+      </LoaderProvider>
     </div>
   );
 };

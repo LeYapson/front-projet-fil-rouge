@@ -4,6 +4,7 @@ import '../styles/index.css';
 const DataGrid = ({ data, columns, onAdd, onEdit, onDelete }) => {
   const [newRow, setNewRow] = useState({});
   const [editIndex, setEditIndex] = useState(null);
+  const [isAdding, setIsAdding] = useState(false); // Indique si on est en train d'ajouter une entrée
 
   const handleInputChange = (key, value) => {
     setNewRow((prevRow) => ({
@@ -15,6 +16,7 @@ const DataGrid = ({ data, columns, onAdd, onEdit, onDelete }) => {
   const handleAdd = () => {
     onAdd(newRow);
     setNewRow({});
+    setIsAdding(false); // Ferme le formulaire après l'ajout
   };
 
   const handleEdit = (index) => {
@@ -32,10 +34,36 @@ const DataGrid = ({ data, columns, onAdd, onEdit, onDelete }) => {
     onDelete(index);
   };
 
+  const startAdding = () => {
+    setIsAdding(true);
+    setNewRow({}); // Réinitialise les champs du formulaire
+  };
+
+  const cancelAdding = () => {
+    setIsAdding(false);
+    setNewRow({});
+  };
+
   return (
     <div className="data-grid-container">
       <div className="data-grid-buttons">
-        <button onClick={handleAdd}>Ajouter</button>
+        {!isAdding && <button onClick={startAdding}>Ajouter</button>}
+        {isAdding && (
+          <div className="add-form">
+            {columns.map((column, index) => (
+              <div key={index} className="form-group">
+                <label>{column}</label>
+                <input
+                  type="text"
+                  value={newRow[column] || ''}
+                  onChange={(e) => handleInputChange(column, e.target.value)}
+                />
+              </div>
+            ))}
+            <button onClick={handleAdd}>Enregistrer</button>
+            <button onClick={cancelAdding}>Annuler</button>
+          </div>
+        )}
       </div>
       <table>
         <thead>
@@ -60,7 +88,7 @@ const DataGrid = ({ data, columns, onAdd, onEdit, onDelete }) => {
                       }
                     />
                   ) : (
-                    row[column.toLowerCase()] // Utilise les noms de colonnes comme clés d'objet
+                    row[column]
                   )}
                 </td>
               ))}
@@ -82,24 +110,6 @@ const DataGrid = ({ data, columns, onAdd, onEdit, onDelete }) => {
               </td>
             </tr>
           ))}
-          {editIndex === null && (
-            <tr>
-              {columns.map((column, columnIndex) => (
-                <td key={columnIndex}>
-                  <input
-                    type="text"
-                    value={newRow[column] || ''}
-                    onChange={(e) =>
-                      handleInputChange(column, e.target.value)
-                    }
-                  />
-                </td>
-              ))}
-              <td>
-                <button onClick={handleAdd}>Ajouter</button>
-              </td>
-            </tr>
-          )}
         </tbody>
       </table>
     </div>
@@ -107,3 +117,4 @@ const DataGrid = ({ data, columns, onAdd, onEdit, onDelete }) => {
 };
 
 export default DataGrid;
+

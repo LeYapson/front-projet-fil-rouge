@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { login } from '../services/api';  
 import loginImage from '../assets/sugoichan.jpg'; // Assurez-vous que le chemin est correct
-import Header from './Header';
+import { login } from '../services/api'; // Importe la fonction login de votre api.js
 import '../styles/index.css';
+import Header from './Header';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -14,68 +14,64 @@ const LoginPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Validation des champs
-    if (!email || !password) {
-      setError('Veuillez remplir tous les champs.');
-      return;
-    }
-
+    setError('');
     setLoading(true);
-    setError(''); // Réinitialise le message d'erreur
-
+  
     try {
-      const response = await login({ email, password });
-      localStorage.setItem('token', response.data.token);
-      setEmail('');
-      setPassword('');
-      navigate('/dashboard');
-    } catch (error) {
-      console.error('Login failed:', error);
+      const response = await login({ email, password }); // Appel à l'API
+      const token = response.data.token;
+      const user = response.data.user;
+  
+      // Stocker le token et les données utilisateur
+      localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(user));
+  
+      // Rediriger en fonction du rôle
+      if (user.is_admin === 1) {
+        navigate('/dashboard');
+      } else {
+        navigate('/home'); // Page d'accueil pour les utilisateurs non admin
+      }
+    } catch (err) {
       setError('Identifiants incorrects. Veuillez réessayer.');
     } finally {
       setLoading(false);
     }
   };
+  
 
   return (
     <div>
-      <Header />
-      <div className="login-container">
-        <div className="login-content">
-          <img src={loginImage} alt="Login" className="login-image" />
-          <form onSubmit={handleSubmit} className="login-form">
-            <h2>CONNEXION</h2>
-
-            {/* Affichage des erreurs */}
-            {error && <p className="error-message">{error}</p>}
-
-            <input
-              type="email"
-              placeholder="Adresse email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              aria-label="Adresse email"
-              required
-            />
-            <input
-              type="password"
-              placeholder="Mot de passe"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              aria-label="Mot de passe"
-              required
-            />
-            <button type="submit" disabled={loading}>
-              {loading ? 'Connexion...' : 'Connexion'}
-            </button>
-
-            <div className="separator">OU</div>
-            <a href="/register" className="a">Créer un compte</a>
-          </form>
-        </div>
+    <Header />
+    <div className="login-container">
+      <div className="login-content">
+      <img src={loginImage} alt="Login" className="login-image" />
+      <form onSubmit={handleSubmit} className="login-form">
+        <h2>Connexion</h2>
+        {error && <p className="error-message">{error}</p>} {/* Affichage des erreurs */}
+        <input
+          type="email"
+          placeholder="Adresse email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Mot de passe"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <button type="submit" disabled={loading}>
+          {loading ? 'Connexion...' : 'Se connecter'}
+        </button>
+        <div className="separator">OU</div>
+        <a href="/registerPage">Créer un compte</a>
+      </form>
       </div>
     </div>
+  </div>
   );
 };
 
