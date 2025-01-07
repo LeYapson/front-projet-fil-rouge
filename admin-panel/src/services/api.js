@@ -18,10 +18,12 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-export const register = (data) => api.post('/register', data);
+export const registerUser = (data) => api.post('/users/create', data);
 export const login = (data) => api.post('/login', data);
 export const getUsers = (page = 1) => api.get(`/users?page=${page}`);
 export const createUser = (data) => api.post('/users', data); // Ajouter un utilisateur
 export const updateUser = (id, data) => api.patch(`/users/${id}`, data); // Modifier un utilisateur
 export const deleteUser = (id) => api.delete(`/users/${id}`); // Supprimer un utilisateur
+export const getCurrentUser = () => api.get('/user');
+
 

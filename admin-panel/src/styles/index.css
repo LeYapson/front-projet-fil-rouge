@@ -321,3 +321,19 @@ body, html {
   margin: 0 10px;
 }
 
+.admin-button {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.admin-button:hover {
+  background-color: #45a049;
+}
+

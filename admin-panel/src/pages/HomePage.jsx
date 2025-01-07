@@ -1,13 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import '../styles/index.css';
 
 const HomePage = () => {
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser)); // Charge les infos utilisateur
+    } else {
+      console.error('Aucun utilisateur connecté. Redirection vers la page de connexion.');
+      navigate('/'); // Redirige vers la page de connexion si non connecté
+    }
+  }, [navigate]);
+
   return (
-    <div>
-      <h1>Home Page</h1>
-      <p>t'as cru j'étais une dinde et que tu serais sur le dashboard admin?</p>
-      <p>Non, tu es sur la page d'accueil pour les utilisateurs non-admins.</p>
-      <p>tiens cadeau pour que sa t'occupe, voila un gif </p>
-      <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdGhrMWpndTR3OXVlcXhhZW52dWx6OWJhMmw0NTQxZm1saHEyOGQwbiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/lrDAgsYq0eomhwoESZ/giphy.webp" alt="gif" />
+    <div className="homepage-container">
+      <h1>Bienvenue sur SugoiQuiz Chan {user?.name} !</h1>
+      <p>
+        Explorez nos quizz et défiez vos amis dans des matchs épiques sur vos animes préférés !
+      </p>
+      {user?.is_admin === 1 && (
+        <button onClick={() => navigate('/dashboard')} className="admin-button">
+          Accéder au Dashboard Admin
+        </button>
+      )}
     </div>
   );
 };

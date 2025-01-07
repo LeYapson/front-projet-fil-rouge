@@ -1,19 +1,48 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { registerUser } from '../services/api'; // Assurez-vous que cette méthode est bien définie
 import loginImage from '../assets/sugoichan.jpg'; // Assurez-vous que le chemin est correct
 import Header from './Header';
 import '../styles/index.css';
 
 const RegisterPage = () => {
   const [email, setEmail] = useState('');
-    const [username, setUsername] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Logique d'inscription'
-    navigate('/dashboard');
+    setError('');
+    setLoading(true);
+
+    // Vérification des mots de passe
+    if (password !== confirmPassword) {
+      setError("Les mots de passe ne correspondent pas.");
+      setLoading(false);
+      return;
+    }
+
+    try {
+      // Appel de l'API pour enregistrer l'utilisateur
+      const response = await registerUser({
+        name: username,
+        email: email,
+        password: password,
+        is_admin: false, // Ajout d'un utilisateur normal
+      });
+
+      console.log('Utilisateur enregistré avec succès :', response.data);
+      navigate('/'); // Redirection vers la homepage
+    } catch (error) {
+      console.error('Erreur lors de l\'inscription :', error);
+      setError('Une erreur est survenue. Veuillez réessayer.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -24,32 +53,39 @@ const RegisterPage = () => {
           <img src={loginImage} alt="Login" className="login-image" />
           <form onSubmit={handleSubmit} className="login-form">
             <h2>INSCRIPTION</h2>
+            {error && <p className="error-message">{error}</p>}
             <input
               type="email"
-              placeholder="email"
+              placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              required
             />
             <input
-              type="username"
-              placeholder="username"
+              type="text"
+              placeholder="Nom d'utilisateur"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              required
             />
             <input
               type="password"
-              placeholder="mot de passe"
+              placeholder="Mot de passe"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              required
             />
             <input
               type="password"
-              placeholder="confirmer mot de passe"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Confirmer le mot de passe"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
             />
-            <button type="submit">Inscription</button>
-            <a href="/" className='a'>J'ai déjà un compte 0w0</a>
+            <button type="submit" disabled={loading}>
+              {loading ? 'Inscription...' : 'Inscription'}
+            </button>
+            <a href="/" className="a">J'ai déjà un compte 0w0</a>
           </form>
         </div>
       </div>

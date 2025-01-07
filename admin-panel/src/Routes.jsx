@@ -1,10 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import LoginPage from './components/LoginPage';
 import Dashboard from './components/Dashboard';
-import HomePage from './pages/HomePage'; // Page d'accueil pour les non-admins
+import HomePage from './pages/HomePage'; // Page d'accueil pour tous
 import NotFound from './pages/NotFound';
-import PrivateRoute from './components/PrivateRoute';
+import RegisterPage from './components/RegisterPage';
 
 const AppRoutes = () => {
   return (
@@ -13,25 +13,14 @@ const AppRoutes = () => {
         {/* Route publique */}
         <Route path="/" element={<LoginPage />} />
 
-        {/* Route protégée pour les admins */}
-        <Route
-          path="/dashboard"
-          element={
-            <PrivateRoute requiredRole={1}>
-              <Dashboard />
-            </PrivateRoute>
-          }
-        />
+        {/* Page d'inscription */}
+        <Route path="/register" element={<RegisterPage />} />
 
-        {/* Route protégée pour les utilisateurs non admin */}
-        <Route
-          path="/home"
-          element={
-            <PrivateRoute requiredRole={0}>
-              <HomePage />
-            </PrivateRoute>
-          }
-        />
+        {/* Page d'accueil accessible à tous après connexion */}
+        <Route path="/home" element={<HomePage />} />
+
+        {/* Dashboard admin */}
+        <Route path="/dashboard" element={<Dashboard />} />
 
         {/* Page 404 */}
         <Route path="*" element={<NotFound />} />
