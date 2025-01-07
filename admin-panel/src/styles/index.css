@@ -5,7 +5,7 @@ body, html {
   height: 100%;
   width: 100%;
   font-family: 'Comic Sans MS', cursive, sans-serif; /* Police kawaii */
-  overflow: hidden; /* Empêche le scroll */
+  /*overflow: hidden;  Empêche le scroll */
   box-sizing: border-box; /* Inclut les marges et les bordures dans la largeur totale */
 }
 
@@ -36,68 +36,7 @@ body, html {
   margin-right: 5px;
 }
 
-/* Styles pour la page de connexion */
-.login-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: calc(100vh - 84px); /* Ajuste la hauteur pour tenir compte du header */
-  background-color: #780d78; /* Couleur de fond kawaii */
-  color: white;
-}
 
-.login-content {
-  display: flex;
-  align-items: center;
-  width: 80%;
-  max-width: 1200px;
-}
-
-.login-image {
-  width: 50%;
-  max-width: 600px;
-  border-radius: 10px;
-}
-
-.login-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 50%;
-  padding: 20px;
-  background-color: #111111; /* Couleur de fond kawaii */
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.login-form h2 {
-  margin-bottom: 20px;
-  color: white;
-}
-
-.login-form input {
-  margin: 10px 0;
-  padding: 10px;
-  width: 80%;
-  border: none;
-  border-radius: 5px;
-}
-
-.login-form button {
-  padding: 10px 20px;
-  background-color: #ff66b2; /* Couleur de bouton kawaii */
-  border: none;
-  color: white;
-  cursor: pointer;
-  border-radius: 5px;
-  margin-top: 20px;
-}
-
-.login-form button:hover {
-  background-color: #ec407a; /* Couleur de bouton kawaii au survol */
-}
 
 .a {
   color: white;

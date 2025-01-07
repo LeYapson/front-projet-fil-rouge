@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { registerUser } from '../services/api'; // Assurez-vous que cette méthode est bien définie
-import loginImage from '../assets/sugoichan.jpg'; // Assurez-vous que le chemin est correct
 import Header from './Header';
-import '../styles/index.css';
+import '../styles/register.css';
 
 const RegisterPage = () => {
   const [email, setEmail] = useState('');
@@ -50,7 +49,6 @@ const RegisterPage = () => {
       <Header />
       <div className="login-container">
         <div className="login-content">
-          <img src={loginImage} alt="Login" className="login-image" />
           <form onSubmit={handleSubmit} className="login-form">
             <h2>INSCRIPTION</h2>
             {error && <p className="error-message">{error}</p>}

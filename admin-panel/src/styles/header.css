@@ -1,0 +1,70 @@
+/* Header global */
+.site-header {
+    display: flex;
+    justify-content: space-between; /* Espace entre le logo et le menu */
+    align-items: center; /* Centre verticalement */
+    padding: 10px 20px;
+    background-color: #2c2f33;
+    border-bottom: 2px solid #ff69b4;
+    color: white;
+  }
+  
+ /* Logo */
+.logo {
+    height: 60px; /* Ajuste la hauteur pour éviter qu'il soit écrasé */
+    width: auto; /* Maintient les proportions */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Menu utilisateur */
+  .user-menu {
+    position: absolute;
+    right: 25px;
+  }
+  
+  /* Bouton du menu */
+  .menu-button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .menu-button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Dropdown */
+  .dropdown-menu {
+    position: absolute;
+    right: 0; /* Aligne à droite du bouton menu */
+    top: 50px; /* Positionne sous le bouton menu */
+    background-color: #fff;
+    color: #333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    overflow: hidden;
+    z-index: 10;
+  }
+  
+  .dropdown-item {
+    padding: 10px 20px;
+    text-align: left;
+    border: none;
+    background: none;
+    width: 100%;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+  
+  .dropdown-item:hover {
+    background-color: #f4f4f4;
+  }
+  

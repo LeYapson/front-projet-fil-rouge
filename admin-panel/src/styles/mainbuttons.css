@@ -1,0 +1,20 @@
+.main-buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 30px 0;
+  }
+  
+  .main-button {
+    background-color: #4caf50;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .main-button:hover {
+    background-color: #45a049;
+  }
+  

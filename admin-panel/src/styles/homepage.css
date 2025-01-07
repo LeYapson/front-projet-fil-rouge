@@ -1,0 +1,135 @@
+/* Général */
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #2c2f33, #23272a);
+    color: #fff;
+  }
+  
+  /* Container principal */
+  .homepage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  /* Header */
+  .homepage-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .homepage-header h1 {
+    font-size: 2.5rem;
+    color: #ff6464;
+  }
+  
+  .homepage-header p {
+    font-size: 1.2rem;
+    margin-top: 10px;
+    color: #ddd;
+  }
+  
+  /* Section principale */
+  .homepage-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .main-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+  
+  .main-button {
+    background-color: #4caf50;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .main-button:hover {
+    background-color: #3e8e41;
+  }
+  
+  .admin-button {
+    margin-top: 20px;
+    background-color: #ff9800;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .admin-button:hover {
+    background-color: #e68900;
+  }
+  
+  /* Section des news */
+  .homepage-news {
+    margin-top: 30px;
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 8px;
+    max-width: 400px;
+    text-align: left;
+  }
+  
+  .homepage-news h3 {
+    margin-top: 0;
+    color: #ff6464;
+  }
+  
+  .homepage-news p {
+    margin: 10px 0;
+    font-size: 0.9rem;
+  }
+  
+  .news-link {
+    color: #4caf50;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .news-link:hover {
+    color: #3e8e41;
+  }
+  
+  /* Pied de page */
+  .homepage-footer {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.9rem;
+  }
+  
+  .footer-section {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .footer-links {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .footer-link {
+    color: #4caf50;
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  
+  .footer-link:hover {
+    color: #3e8e41;
+  }
+  
