@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { registerUser } from '../services/api'; // Assurez-vous que cette méthode est bien définie
-import Header from './Header';
-import '../styles/register.css';
+import { registerUser } from '../../services/api'; // Assurez-vous que cette méthode est bien définie
+import Header from '../Header/Header';
+import './register.css';
+import { useLoader } from '../LoaderContext/LoaderContext'; // Utilisation du contexte pour le loader
+import LoaderBar from '../LoaderContext/LoaderBar'; // Barre de progression
 
 const RegisterPage = () => {
   const [email, setEmail] = useState('');
@@ -10,20 +12,21 @@ const RegisterPage = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
+  const { startLoading } = useLoader(); // Accès à la fonction de chargement
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    setLoading(true);
 
     // Vérification des mots de passe
     if (password !== confirmPassword) {
       setError("Les mots de passe ne correspondent pas.");
-      setLoading(false);
       return;
     }
+
+    // Démarrer la barre de progression
+    startLoading(3000); // Par exemple, 3 secondes
 
     try {
       // Appel de l'API pour enregistrer l'utilisateur
@@ -35,18 +38,17 @@ const RegisterPage = () => {
       });
 
       console.log('Utilisateur enregistré avec succès :', response.data);
-      navigate('/'); // Redirection vers la homepage
+      navigate('/'); // Redirection vers la homepage après inscription
     } catch (error) {
       console.error('Erreur lors de l\'inscription :', error);
       setError('Une erreur est survenue. Veuillez réessayer.');
-    } finally {
-      setLoading(false);
     }
   };
 
   return (
     <div>
       <Header />
+      <LoaderBar /> {/* Barre de progression */}
       <div className="login-container">
         <div className="login-content">
           <form onSubmit={handleSubmit} className="login-form">
@@ -80,8 +82,8 @@ const RegisterPage = () => {
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
             />
-            <button type="submit" disabled={loading}>
-              {loading ? 'Inscription...' : 'Inscription'}
+            <button type="submit">
+              Inscription
             </button>
             <a href="/" className="a">J'ai déjà un compte 0w0</a>
           </form>

@@ -4,7 +4,7 @@ import { getUsers, createUser, updateUser, deleteUser } from '../services/api';
 import '../styles/index.css';
 import userIcon from '../assets/chibiprofil.webp';
 import chibiIcon from '../assets/chibihappy.png';
-import Header from './Header';
+import Header from './Header/Header';
 import DataGrid from './DataGridPage';
 
 const Dashboard = () => {

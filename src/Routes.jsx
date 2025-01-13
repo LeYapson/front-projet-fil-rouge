@@ -1,10 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import LoginPage from './components/LoginPage';
+import LoginPage from './components/Login/LoginPage';
 import Dashboard from './components/Dashboard';
 import HomePage from './pages/HomePage'; // Page d'accueil pour tous
 import NotFound from './pages/NotFound';
-import RegisterPage from './components/RegisterPage';
+import RegisterPage from './components/Register/RegisterPage';
+import SongLibrary from './components/SongLibrary/SongLibrary';
 
 const AppRoutes = () => {
   return (
@@ -24,6 +25,9 @@ const AppRoutes = () => {
 
         {/* Page 404 */}
         <Route path="*" element={<NotFound />} />
+
+        {/* Page de la bibliothèque de chansons */}
+        <Route path="/library" element={<SongLibrary />} />
       </Routes>
     </Router>
   );

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Header from '../components/Header';
+import Header from '../components/Header/Header';
 import MainButtons from '../components/MainButtons';
 import NewsSection from '../components/NewsSection';
-import Footer from '../components/Footer';
+import Footer from '../components/Footer/Footer';
 import '../styles/homepage.css';
 
 const HomePage = () => {

@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { login } from '../services/api';
-import '../styles/login.css';
-import Header from './Header';
+import { login } from '../../services/api';
+import './login.css';
+import Header from '../Header/Header';
+import { useLoader } from '../LoaderContext/LoaderContext'; // Utilise le contexte de chargement
+import LoaderBar from '../LoaderContext/LoaderBar'; // Barre de progression
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
+  const { startLoading } = useLoader(); // Accès à la fonction de chargement
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    setLoading(true);
+    startLoading(3000); // Démarre la barre de chargement (3 secondes)
 
     try {
       const response = await login({ email, password });
@@ -24,17 +26,16 @@ const LoginPage = () => {
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
 
-      navigate('/home');
+      navigate('/home'); // Redirection après connexion
     } catch (err) {
       setError('Identifiants incorrects. Veuillez réessayer.');
-    } finally {
-      setLoading(false);
     }
   };
 
   return (
     <div>
       <Header />
+      <LoaderBar /> {/* Barre de progression */}
       <div className="login-container">
         <div className="login-content">
           <h2>Connexion</h2>
@@ -54,8 +55,8 @@ const LoginPage = () => {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-            <button type="submit" disabled={loading}>
-              {loading ? 'Connexion...' : 'Se connecter'}
+            <button type="submit">
+              Se connecter
             </button>
             <div className="separator">OU</div>
             <a href="/register">Créer un compte</a>

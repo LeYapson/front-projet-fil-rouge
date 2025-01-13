@@ -1,0 +1,16 @@
+.loader-bar-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background-color: rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+  
+  .loader-bar {
+    height: 100%;
+    background-color: #4caf50; /* Couleur de la barre */
+    transition: width 0.1s linear;
+  }
+  

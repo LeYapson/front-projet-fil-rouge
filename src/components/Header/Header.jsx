@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import logo from '../assets/sugoiquizchan.png';
-import '../styles/header.css';
+import logo from '../../assets/sugoiquizchan.png';
+import './header.css';
 
 const Header = ({ user }) => {
   const [menuOpen, setMenuOpen] = useState(false);

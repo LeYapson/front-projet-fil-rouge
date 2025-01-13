@@ -1,6 +1,6 @@
 import React from 'react';
 import notFoundImage from '../assets/chibi404.png'; // Assurez-vous que le chemin est correct
-import Header from '../components/Header';
+import Header from '../components/Header/Header';
 import '../styles/index.css';
 
 const NotFound = () => {
