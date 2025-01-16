@@ -1,20 +1,20 @@
 import React from 'react';
 
 const SongList = ({ songs }) => {
+  if (!songs || songs.length === 0) {
+    return <p>Aucun résultat trouvé.</p>;
+  }
+
   return (
-    <div className="song-list">
-      {songs.length === 0 ? (
-        <p>Aucune chanson trouvée.</p>
-      ) : (
-        songs.map((song) => (
-          <div key={song.id} className="song-item">
-            <h3>{song.title}</h3>
-            <p>{song.season}</p>
-            <p>Type : {song.type}</p>
-          </div>
-        ))
-      )}
-    </div>
+    <ul>
+      {songs.map((song) => (
+        <li key={song.id}>
+          <h3>{song.title}</h3>
+          <p>{song.description}</p>
+          <img src={song.image} alt={song.title} />
+        </li>
+      ))}
+    </ul>
   );
 };
 

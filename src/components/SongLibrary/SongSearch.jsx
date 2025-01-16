@@ -5,7 +5,7 @@ const SongSearch = ({ searchQuery, setSearchQuery }) => {
     <div className="song-search">
       <input
         type="text"
-        placeholder="Rechercher une chanson..."
+        placeholder="Rechercher un anime..."
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
       />

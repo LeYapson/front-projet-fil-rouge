@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getUsers, createUser, updateUser, deleteUser } from '../services/api';
+import { getUsers, createUser, updateUser, deleteUser, getAnimes, createAnime, updateAnime, deleteAnime } from '../services/api';
 import '../styles/index.css';
-import userIcon from '../assets/chibiprofil.webp';
-import chibiIcon from '../assets/chibihappy.png';
 import Header from './Header/Header';
 import DataGrid from './DataGridPage';
 
@@ -11,14 +9,13 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const [selectedTable, setSelectedTable] = useState(null);
   const [tableData, setTableData] = useState({ columns: [], data: [] });
-  const [message, setMessage] = useState(''); // Pour les messages de feedback
+  const [message, setMessage] = useState('');
   const [pagination, setPagination] = useState({
     currentPage: 1,
     lastPage: 1,
     nextPageUrl: null,
     prevPageUrl: null,
   });
-  
 
   // Déconnexion
   const handleLogout = () => {
@@ -30,15 +27,19 @@ const Dashboard = () => {
   const handleNavigation = (table) => {
     setSelectedTable(table);
     setTableData(getInitialData(table));
-    fetchUsers(); // Charge les utilisateurs dès la sélection de la table
   };
 
-  // Initialisation des données selon la table sélectionnée
+  // Initialisation des données pour chaque table
   const getInitialData = (table) => {
     switch (table) {
       case 'utilisateurs':
         return {
-          columns: ['id', 'name', 'email', 'is_admin'], // Colonnes pour les utilisateurs
+          columns: ['id', 'name', 'email'],
+          data: [],
+        };
+      case 'animes':
+        return {
+          columns: ['id', 'title', 'release_date' ],
           data: [],
         };
       default:
@@ -46,74 +47,116 @@ const Dashboard = () => {
     }
   };
 
-  // Récupération des utilisateurs
-  const fetchUsers = async (page = 1) => {
-    if (!selectedTable) return; // Ne pas exécuter si aucune table sélectionnée
+
+
+  const fetchTableData = useCallback(async (page = 1) => {
+    if (!selectedTable) return;
+
     try {
-      const response = await getUsers(page); // Appel API avec la page
+      let response;
+      if (selectedTable === 'utilisateurs') {
+        response = await getUsers(page);
+      } else if (selectedTable === 'animes') {
+        response = await getAnimes(page);
+      }
+
+      console.log('Réponse reçue :', response.data); // Ajoutez cette ligne
+
       setTableData((prevData) => ({
         ...prevData,
-        data: response.data.data, // Données paginées
+        data: response.data.data,
       }));
+
       setPagination({
         currentPage: response.data.current_page,
         lastPage: response.data.last_page,
         nextPageUrl: response.data.next_page_url,
         prevPageUrl: response.data.prev_page_url,
       });
+
       setMessage('Données chargées avec succès.');
     } catch (error) {
       console.error('Erreur lors du chargement des données :', error);
       setMessage('Erreur lors du chargement des données.');
     }
-  };
+  }, [selectedTable]); // Dépend de selectedTable
 
-  // Ajout d'un utilisateur
+  useEffect(() => {
+    if (selectedTable) {
+      fetchTableData();
+    }
+  }, [selectedTable, fetchTableData]); // Inclure fetchTableData dans les dépendances
+
+
+
+  // Ajouter une entrée
   const handleAdd = async (newRow) => {
     try {
-      const response = await createUser(newRow);
+      let response;
+      if (selectedTable === 'utilisateurs') {
+        response = await createUser(newRow);
+      } else if (selectedTable === 'animes') {
+        response = await createAnime(newRow);
+      }
+
       setTableData((prevData) => ({
         ...prevData,
         data: [...prevData.data, response.data],
       }));
-      setMessage('Utilisateur ajouté avec succès.');
+
+      setMessage('Donnée ajoutée avec succès.');
     } catch (error) {
       console.error('Erreur lors de l’ajout :', error);
-      setMessage('Erreur lors de l’ajout de l’utilisateur.');
+      setMessage('Erreur lors de l’ajout.');
     }
   };
 
-  // Modification d'un utilisateur
+  // Modifier une entrée
   const handleEdit = async (index, newRow) => {
     try {
       const id = tableData.data[index].id;
-      const response = await updateUser(id, newRow);
+      let response;
+
+      if (selectedTable === 'utilisateurs') {
+        response = await updateUser(id, newRow);
+      } else if (selectedTable === 'animes') {
+        response = await updateAnime(id, newRow);
+      }
+
       setTableData((prevData) => ({
         ...prevData,
         data: prevData.data.map((row, rowIndex) =>
           rowIndex === index ? response.data : row
         ),
       }));
-      setMessage('Utilisateur modifié avec succès.');
+
+      setMessage('Donnée modifiée avec succès.');
     } catch (error) {
       console.error('Erreur lors de la modification :', error);
-      setMessage('Erreur lors de la modification de l’utilisateur.');
+      setMessage('Erreur lors de la modification.');
     }
   };
 
-  // Suppression d'un utilisateur
+  // Supprimer une entrée
   const handleDelete = async (index) => {
     try {
       const id = tableData.data[index].id;
-      await deleteUser(id);
+
+      if (selectedTable === 'utilisateurs') {
+        await deleteUser(id);
+      } else if (selectedTable === 'animes') {
+        await deleteAnime(id);
+      }
+
       setTableData((prevData) => ({
         ...prevData,
         data: prevData.data.filter((_, rowIndex) => rowIndex !== index),
       }));
-      setMessage('Utilisateur supprimé avec succès.');
+
+      setMessage('Donnée supprimée avec succès.');
     } catch (error) {
       console.error('Erreur lors de la suppression :', error);
-      setMessage('Erreur lors de la suppression de l’utilisateur.');
+      setMessage('Erreur lors de la suppression.');
     }
   };
 
@@ -121,7 +164,6 @@ const Dashboard = () => {
     <div>
       <Header
         logoutButton={{ label: 'Déconnexion', onClick: handleLogout }}
-        userIcon={{ src: userIcon }}
       />
       <div className="dashboard-container">
         <div className="management-buttons">
@@ -133,14 +175,21 @@ const Dashboard = () => {
           >
             Gestion Utilisateurs
           </button>
-          {/* Ajoutez d'autres boutons pour d'autres tables ici */}
+          <button
+            onClick={() => handleNavigation('animes')}
+            className={`management-button ${
+              selectedTable === 'animes' ? 'active' : ''
+            }`}
+          >
+            Gestion Animes
+          </button>
         </div>
         {message && <p className="feedback-message">{message}</p>}
         {selectedTable && (
           <>
             <div className="pagination">
               <button
-                onClick={() => fetchUsers(pagination.currentPage - 1)}
+                onClick={() => fetchTableData(pagination.currentPage - 1)}
                 disabled={!pagination.prevPageUrl}
               >
                 &larr; Précédent
@@ -149,7 +198,7 @@ const Dashboard = () => {
                 Page {pagination.currentPage} sur {pagination.lastPage}
               </span>
               <button
-                onClick={() => fetchUsers(pagination.currentPage + 1)}
+                onClick={() => fetchTableData(pagination.currentPage + 1)}
                 disabled={!pagination.nextPageUrl}
               >
                 Suivant &rarr;
@@ -162,26 +211,8 @@ const Dashboard = () => {
               onEdit={handleEdit}
               onDelete={handleDelete}
             />
-            <div className="pagination">
-              <button
-                onClick={() => fetchUsers(pagination.currentPage - 1)}
-                disabled={!pagination.prevPageUrl}
-              >
-                &larr; Précédent
-              </button>
-              <span>
-                Page {pagination.currentPage} sur {pagination.lastPage}
-              </span>
-              <button
-                onClick={() => fetchUsers(pagination.currentPage + 1)}
-                disabled={!pagination.nextPageUrl}
-              >
-                Suivant &rarr;
-              </button>
-            </div>
           </>
         )}
-        <img src={chibiIcon} alt="Chibi Icon" className="chibi-icon" />
       </div>
     </div>
   );

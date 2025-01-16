@@ -4,10 +4,11 @@ import SongFilters from './SongFilters';
 import SongList from './SongList';
 import './songlibrary.css';
 import Header from '../Header/Header';
+import { searchAnimes } from '../../services/api'; // Assure-toi que cette fonction existe
 
 const SongLibrary = () => {
-  const [songs, setSongs] = useState([]);
-  const [filteredSongs, setFilteredSongs] = useState([]);
+  const [animes, setAnimes] = useState([]);
+  const [filteredAnimes, setFilteredAnimes] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [filters, setFilters] = useState({
     watched: false,
@@ -17,48 +18,49 @@ const SongLibrary = () => {
     inserts: false,
   });
 
-  // Appel API pour récupérer les chansons
+  // Appel API pour récupérer les animes
   useEffect(() => {
-    const fetchSongs = async () => {
+    const fetchAnimes = async () => {
       try {
-        const response = await fetch('/api/songs'); // Remplace par ton endpoint API
-        const data = await response.json();
-        setSongs(data);
-        setFilteredSongs(data);
+        const response = await searchAnimes(searchQuery); // Appel à l'API
+        const animeList = response.data.data; // Accéder aux données de l'API
+        setAnimes(animeList || []); // Assurez-vous que l'état est toujours un tableau
+        setFilteredAnimes(animeList || []);
       } catch (error) {
-        console.error('Erreur lors du chargement des chansons :', error);
+        console.error('Erreur lors du chargement des animes :', error);
       }
     };
+  
+    fetchAnimes();
+  }, [searchQuery]);
+  
 
-    fetchSongs();
-  }, []);
-
-  // Filtrer les chansons en fonction des filtres actifs
+  // Filtrer les animes en fonction des filtres actifs
   useEffect(() => {
-    let filtered = songs;
+    let filtered = animes;
 
-    if (filters.watched) filtered = filtered.filter((song) => song.watched);
-    if (filters.unwatched) filtered = filtered.filter((song) => !song.watched);
-    if (filters.openings) filtered = filtered.filter((song) => song.type === 'OP');
-    if (filters.endings) filtered = filtered.filter((song) => song.type === 'ED');
-    if (filters.inserts) filtered = filtered.filter((song) => song.type === 'IN');
+    if (filters.watched) filtered = filtered.filter((anime) => anime.watched); // Exemple : Adapter selon ta logique
+    if (filters.unwatched) filtered = filtered.filter((anime) => !anime.watched);
+    if (filters.openings) filtered = filtered.filter((anime) => anime.openings && anime.openings.length > 0);
+    if (filters.endings) filtered = filtered.filter((anime) => anime.endings && anime.endings.length > 0);
+    if (filters.inserts) filtered = filtered.filter((anime) => anime.inserts && anime.inserts.length > 0);
 
     if (searchQuery) {
-      filtered = filtered.filter((song) =>
-        song.title.toLowerCase().includes(searchQuery.toLowerCase())
+      filtered = filtered.filter((anime) =>
+        anime.title.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
 
-    setFilteredSongs(filtered);
-  }, [filters, searchQuery, songs]);
+    setFilteredAnimes(filtered);
+  }, [filters, searchQuery, animes]);
 
   return (
     <div className="song-library-container">
-        <Header />
-      <h2>Bibliothèque de chansons</h2>
+      <Header />
+      <h2>Bibliothèque des animes</h2>
       <SongSearch searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       <SongFilters filters={filters} setFilters={setFilters} />
-      <SongList songs={filteredSongs} />
+      <SongList songs={filteredAnimes} />
     </div>
   );
 };
