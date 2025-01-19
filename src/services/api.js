@@ -35,5 +35,9 @@ export const updateAnime = (id, data) => api.patch(`/animes/${id}`, data);
 export const deleteAnime = (id) => api.delete(`/animes/${id}`);
 export const searchAnimes = (query) => api.get(`/animes/search`, { params: { query } });
 
+export const fetchSessions = () => api.get('/sessions');
+export const joinSession = (sessionId) => api.post('/sessions/join', { session_id: sessionId });
+export const createSession = (data) => api.post('/sessions/create', data);
+
 
 

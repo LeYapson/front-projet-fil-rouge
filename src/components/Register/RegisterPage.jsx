@@ -34,7 +34,7 @@ const RegisterPage = () => {
         name: username,
         email: email,
         password: password,
-        is_admin: false, // Ajout d'un utilisateur normal
+        is_admin: 0, // Ajout d'un utilisateur normal
       });
 
       console.log('Utilisateur enregistré avec succès :', response.data);
@@ -55,17 +55,17 @@ const RegisterPage = () => {
             <h2>INSCRIPTION</h2>
             {error && <p className="error-message">{error}</p>}
             <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <input
               type="text"
               placeholder="Nom d'utilisateur"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+            <input
+              type="email"
+              placeholder="E-mail"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
             <input

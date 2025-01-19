@@ -6,6 +6,7 @@ import HomePage from './pages/HomePage'; // Page d'accueil pour tous
 import NotFound from './pages/NotFound';
 import RegisterPage from './components/Register/RegisterPage';
 import SongLibrary from './components/SongLibrary/SongLibrary';
+import SessionList from './components/SessionList/SessionList';
 
 const AppRoutes = () => {
   return (
@@ -28,6 +29,11 @@ const AppRoutes = () => {
 
         {/* Page de la bibliothèque de chansons */}
         <Route path="/library" element={<SongLibrary />} />
+
+        {/* Page des sessions */}
+        <Route path="/quiz" element={<SessionList />} />
+
+        {/* Page du lobby */}
       </Routes>
     </Router>
   );
