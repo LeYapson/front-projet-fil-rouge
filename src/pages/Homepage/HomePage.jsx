@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Header from '../components/Header/Header';
-import MainButtons from '../components/MainButtons';
-import NewsSection from '../components/NewsSection';
-import Footer from '../components/Footer/Footer';
-import '../styles/homepage.css';
+import Header from '../../components/Header/Header';
+import MainButtons from '../../components/MainButtons/MainButtons';
+import NewsSection from '../../components/NewsSection/NewsSection';
+import Footer from '../../components/Footer/Footer';
+import './homepage.css';
 
 const HomePage = () => {
   const [user, setUser] = useState(null);

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { registerUser } from '../../services/api'; // Assurez-vous que cette méthode est bien définie
-import Header from '../Header/Header';
+import Header from '../../components/Header/Header';
 import './register.css';
-import { useLoader } from '../LoaderContext/LoaderContext'; // Utilisation du contexte pour le loader
-import LoaderBar from '../LoaderContext/LoaderBar'; // Barre de progression
+import { useLoader } from '../../components/LoaderContext/LoaderContext'; // Utilisation du contexte pour le loader
+import LoaderBar from '../../components/LoaderContext/LoaderBar'; // Barre de progression
 
 const RegisterPage = () => {
   const [email, setEmail] = useState('');
@@ -52,7 +52,7 @@ const RegisterPage = () => {
       <div className="login-container">
         <div className="login-content">
           <form onSubmit={handleSubmit} className="login-form">
-            <h2>INSCRIPTION</h2>
+            <h2>Rejoins nous !</h2>
             {error && <p className="error-message">{error}</p>}
             <input
               type="text"

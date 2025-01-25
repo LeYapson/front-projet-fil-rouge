@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/mainbuttons.css';
+import './mainbuttons.css';
 
 const MainButtons = () => {
   const navigate = useNavigate();

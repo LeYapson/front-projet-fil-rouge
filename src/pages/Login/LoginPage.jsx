@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../../services/api';
 import './login.css';
-import Header from '../Header/Header';
-import { useLoader } from '../LoaderContext/LoaderContext'; // Utilise le contexte de chargement
-import LoaderBar from '../LoaderContext/LoaderBar'; // Barre de progression
+import Header from '../../components/Header/Header';
+import { useLoader } from '../../components/LoaderContext/LoaderContext'; // Utilise le contexte de chargement
+import LoaderBar from '../../components/LoaderContext/LoaderBar'; // Barre de progression
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');

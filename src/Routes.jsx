@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import LoginPage from './components/Login/LoginPage';
+import LoginPage from './pages/Login/LoginPage';
 import Dashboard from './components/Dashboard';
-import HomePage from './pages/HomePage'; // Page d'accueil pour tous
-import NotFound from './pages/NotFound';
-import RegisterPage from './components/Register/RegisterPage';
+import HomePage from './pages/Homepage/HomePage'; // Page d'accueil pour tous
+import NotFound from './pages/NotFound/NotFound';
+import RegisterPage from './pages/Register/RegisterPage';
 import SongLibrary from './components/SongLibrary/SongLibrary';
 import SessionList from './components/SessionList/SessionList';
 
