@@ -1,22 +1,18 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import LoginPage from './pages/Login/LoginPage';
 import Dashboard from './components/Dashboard';
 import HomePage from './pages/Homepage/HomePage'; // Page d'accueil pour tous
 import NotFound from './pages/NotFound/NotFound';
-import RegisterPage from './pages/Register/RegisterPage';
 import SongLibrary from './components/SongLibrary/SongLibrary';
 import SessionList from './components/SessionList/SessionList';
+import AuthPage from './pages/AuthPage/AuthPage';
 
 const AppRoutes = () => {
   return (
     <Router>
       <Routes>
         {/* Route publique */}
-        <Route path="/" element={<LoginPage />} />
-
-        {/* Page d'inscription */}
-        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/" element={<AuthPage />} />
 
         {/* Page d'accueil accessible à tous après connexion */}
         <Route path="/home" element={<HomePage />} />

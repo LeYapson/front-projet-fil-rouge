@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import logo from '../../assets/sqc_logo(2).png';
+import logo from '../../assets/sqc_logo2.png';
 import './header.css';
 
 const Header = ({ user }) => {
