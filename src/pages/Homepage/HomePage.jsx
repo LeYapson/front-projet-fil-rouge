@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Header from '../../components/Header/Header';
-import MainButtons from '../../components/MainButtons/MainButtons';
 import NewsSection from '../../components/NewsSection/NewsSection';
+import Chibicapuche from '../../assets/chibicapuche.png';
 import Footer from '../../components/Footer/Footer';
+import Header from '../../components/Header/Header';
 import './homepage.css';
 
 const HomePage = () => {
@@ -21,18 +21,25 @@ const HomePage = () => {
 
   return (
     <div className="homepage">
-      {/* Header */}
-      <Header user={user} />
+  <Header user={user} />
+  <main className="main-content">
+    <section className="left-section">
+      <img src={Chibicapuche} alt="Mascot" className="mascot" />
+      <h1>La révolution des blindtests c'est ici !</h1>
+      <p>Rejoins des milliers de joueurs dans des quiz immersifs et amusants.</p>
+    </section>
 
-      {/* Section principale */}
-      <MainButtons user={user} />
-
-      {/* Section des news */}
+    <section className="right-section">
       <NewsSection />
+      <button className="play-button">Jouer</button>
+      <button className="sessions-button">Voir les sessions</button>
+      <button className="leaderboard-button">Classements</button>
+    </section>
+  </main>
 
-      {/* Pied de page */}
-      <Footer />
-    </div>
+  <Footer />
+</div>
+
   );
 };
 

@@ -1,12 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { getUsers, createUser, updateUser, deleteUser, getAnimes, createAnime, updateAnime, deleteAnime } from '../services/api';
 import '../styles/index.css';
 import Header from './Header/Header';
 import DataGrid from './DataGridPage';
 
 const Dashboard = () => {
-  const navigate = useNavigate();
   const [selectedTable, setSelectedTable] = useState(null);
   const [tableData, setTableData] = useState({ columns: [], data: [] });
   const [message, setMessage] = useState('');
@@ -16,12 +14,6 @@ const Dashboard = () => {
     nextPageUrl: null,
     prevPageUrl: null,
   });
-
-  // Déconnexion
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    navigate('/');
-  };
 
   // Gestion de la navigation
   const handleNavigation = (table) => {
@@ -162,9 +154,7 @@ const Dashboard = () => {
 
   return (
     <div>
-      <Header
-        logoutButton={{ label: 'Déconnexion', onClick: handleLogout }}
-      />
+      <Header />
       <div className="dashboard-container">
         <div className="management-buttons">
           <button

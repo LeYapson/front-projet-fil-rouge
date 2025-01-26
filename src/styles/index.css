@@ -4,7 +4,7 @@ body, html {
   padding: 0;
   height: 100%;
   width: 100%;
-  font-family: 'Comic Sans MS', cursive, sans-serif; /* Police kawaii */
+  font-family: 'Montserrat', cursive, sans-serif; /* Police kawaii */
   /*overflow: hidden;  Empêche le scroll */
   box-sizing: border-box; /* Inclut les marges et les bordures dans la largeur totale */
 }
@@ -128,20 +128,6 @@ body, html {
   width: 200px; /* Ajustez la taille selon vos préférences */
   height: auto;
 }
-
-/* Styles pour la page 404 */
-.not-found-container {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: calc(100vh - 84px); /* Ajuste la hauteur pour tenir compte du header */
-  width: 100%;
-  background-color: #ffccff; /* Couleur de fond kawaii */
-  color: #ff66b2; /* Couleur de texte kawaii */
-  text-align: center;
-}
 .dashboard-container {
   position: relative;
   display: flex;
@@ -154,21 +140,7 @@ body, html {
   overflow: hidden; /* Empêche le débordement */
 }
 
-.not-found-title {
-  font-size: 48px;
-  margin-bottom: 20px;
-}
 
-.not-found-text {
-  font-size: 24px;
-  margin-bottom: 40px;
-}
-
-.not-found-image {
-  width: 400px; /* Ajustez la taille selon vos préférences */
-  height: auto;
-  margin-top: auto; /* Centre l'image en bas */
-}
 
 /* Styles pour le DataGrid */
 .data-grid-container {

@@ -1,12 +1,3 @@
-@font-face {
-    font-family: "Exo2"; /* Nom personnalisé de la police */
-    src: url("/src/assets/fonts/Exo2-VariableFont_wght.ttf") format("ttf"),
-        url("/src/assets/fonts/Exo2-Italic-VariableFont_wght.ttf") format("ttf");
-
-    font-weight: 400; /* Poids de la police */
-    font-style: normal; /* Style de la police */
-  }
-  
 
 /* Conteneur principal */
 .auth-page {
@@ -14,12 +5,12 @@
     height: 100vh;
     background: linear-gradient(120deg, #780B78, #3b053b);
     color: white;
-    font-family: 'Exo2', sans-serif;
+    font-family: 'Exo 2', sans-serif;
   }
 
   .logo {
     width: 480px;
-    height: 270px;
+    height: auto;
     margin: 0 auto;
     margin-top: 0px;
   }

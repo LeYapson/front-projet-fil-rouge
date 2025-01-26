@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import logo from '../../assets/sqc_logo2.png';
+import React, {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import './header.css';
+import Logo from '../../assets/sqc_logo2.png';
 
 const Header = ({ user }) => {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation(); // Permet de vérifier la page actuelle
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -14,45 +13,37 @@ const Header = ({ user }) => {
     navigate('/');
   };
 
-  // Vérifie si on est sur une page publique (Login ou Register)
-  const isPublicPage = location.pathname === '/' || location.pathname === '/register';
+  const handleNavigate = (path) => {
+    navigate(path);
+    setIsMenuOpen(false);
+    
+  }
+
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => !prev);
+  };
 
   return (
-    <header className="site-header">
-      {/* Logo cliquable pour revenir à la homepage */}
-      <img
-        src={logo}
-        alt="SugoiQuiz Logo"
-        className="logo"
-        onClick={() => navigate('/home')}
-      />
-
-      {/* Menu utilisateur (masqué sur les pages publiques) */}
-      {!isPublicPage && (
-        <div className="user-menu">
-          <button
-            className="menu-button"
-            onClick={() => setMenuOpen((prev) => !prev)}
-          >
-            Menu ▾
-          </button>
-          {menuOpen && (
-            <div className="dropdown-menu">
-              {user?.is_admin === 1 && (
-                <button
-                  onClick={() => navigate('/dashboard')}
-                  className="dropdown-item"
-                >
-                  Panel Admin
-                </button>
-              )}
-              <button onClick={handleLogout} className="dropdown-item">
-                Déconnexion
-              </button>
-            </div>
-          )}
-        </div>
-      )}
+    <header className="header">
+      <div className="logo-section">
+      <img src={Logo} alt="Logo" className="logo" />
+      </div>
+      <nav className={`nav ${isMenuOpen ? 'open' : ''}`}>
+        <button onClick={() => handleNavigate('/home')}>Accueil</button>
+        <button onClick={() => handleNavigate('/sessions')}>Sessions</button>
+        <button onClick={() => handleNavigate('/leaderboard')}>Classements</button>
+        {user?.is_admin && (
+          <button onClick={() => handleNavigate('/dashboard')}>Admin</button>
+        )}
+        <button onClick={() => handleNavigate('/profile')}>Profil</button>
+        <button onClick={handleLogout}>Déconnexion</button>
+      </nav>
+      <button
+        className="burger-menu"
+        onClick={toggleMenu}
+      >
+        ☰
+      </button>
     </header>
   );
 };

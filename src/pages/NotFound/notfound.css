@@ -1,0 +1,30 @@
+/* Styles pour la page 404 */
+.not-found-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Exo 2', sans-serif;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 84px); /* Ajuste la hauteur pour tenir compte du header */
+    width: 100%;
+    background-color: #ffccff; /* Couleur de fond kawaii */
+    color: #ff66b2; /* Couleur de texte kawaii */
+    text-align: center;
+  }
+
+  .not-found-title {
+    font-size: 48px;
+    margin-bottom: 20px;
+  }
+  
+  .not-found-text {
+    font-size: 24px;
+    margin-bottom: 40px;
+  }
+  
+  .not-found-image {
+    width: 400px; /* Ajustez la taille selon vos préférences */
+    height: auto;
+    margin-top: auto; /* Centre l'image en bas */
+  }
