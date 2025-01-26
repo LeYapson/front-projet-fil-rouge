@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Dashboard from './components/Dashboard';
+import Dashboard from './pages/Dashboard/Dashboard';
 import HomePage from './pages/Homepage/HomePage'; // Page d'accueil pour tous
 import NotFound from './pages/NotFound/NotFound';
 import SongLibrary from './components/SongLibrary/SongLibrary';

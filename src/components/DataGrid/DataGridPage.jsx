@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../styles/index.css';
+import './datagrid.css';
 
 const DataGrid = ({ data = [], columns, onAdd, onEdit, onDelete }) => {
   const [newRow, setNewRow] = useState({});

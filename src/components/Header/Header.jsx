@@ -30,7 +30,7 @@ const Header = ({ user }) => {
       </div>
       <nav className={`nav ${isMenuOpen ? 'open' : ''}`}>
         <button onClick={() => handleNavigate('/home')}>Accueil</button>
-        <button onClick={() => handleNavigate('/sessions')}>Sessions</button>
+        <button onClick={() => handleNavigate('/library')}>Bibliothèque</button>
         <button onClick={() => handleNavigate('/leaderboard')}>Classements</button>
         {user?.is_admin && (
           <button onClick={() => handleNavigate('/dashboard')}>Admin</button>

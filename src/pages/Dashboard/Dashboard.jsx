@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { getUsers, createUser, updateUser, deleteUser, getAnimes, createAnime, updateAnime, deleteAnime } from '../services/api';
-import '../styles/index.css';
-import Header from './Header/Header';
-import DataGrid from './DataGridPage';
+import { getUsers, createUser, updateUser, deleteUser, getAnimes, createAnime, updateAnime, deleteAnime } from '../../services/api';
+import './dashboard.css';
+import Header from '../../components/Header/Header';
+import DataGrid from '../../components/DataGrid/DataGridPage';
 
 const Dashboard = () => {
   const [selectedTable, setSelectedTable] = useState(null);
