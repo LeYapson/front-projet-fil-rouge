@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { fetchSessions, createSession, joinSession } from '../../services/api';
+import { fetchSessions, joinSession } from '../../services/api';
 import CreateSessionModal from './CreateSessionModal';
 
 const SessionList = () => {
