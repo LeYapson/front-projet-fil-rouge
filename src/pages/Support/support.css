@@ -1,0 +1,98 @@
+/* support.css */
+
+.support-container {
+    display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: 'Exo 2', sans-serif;
+  margin: 0;
+  background: linear-gradient(120deg, #780B78, #3b053b);
+  color: #fff;
+  }
+  
+  .support-title {
+    font-size: 2.5rem;
+    color: #ffffff; /* Couleur principale */
+    margin-bottom: 20px;
+  }
+  
+  .support-description {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    line-height: 1.6;
+  }
+  
+  .support-form {
+    background-color: #b11eb1;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: left;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  input,
+  textarea {
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  
+  textarea {
+    align-items: center;
+    justify-content: center;
+    resize: none;
+  }
+  
+  .support-button {
+    background-color: #e91e63;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .support-button:hover {
+    background-color: #c2185b;
+  }
+  
+  .support-thankyou {
+    font-size: 1.2rem;
+    color: #ffffff;
+    font-style: italic;
+    margin-top: 20px;
+  }
+  
+  /* Responsivité */
+  @media (max-width: 930px) {
+    .support-title {
+      font-size: 2rem;
+    }
+  
+    .support-description {
+      font-size: 1rem;
+    }
+  
+    .support-form {
+      padding: 15px;
+    }
+  }
+  

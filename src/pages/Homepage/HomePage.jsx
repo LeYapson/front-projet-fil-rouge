@@ -27,10 +27,10 @@ const HomePage = () => {
       <img src={Chibicapuche} alt="Mascot" className="mascot" />
       <h1>La révolution des blindtests c'est ici !</h1>
       <p>Rejoins des milliers de joueurs dans des quiz immersifs et amusants.</p>
+      <NewsSection />
     </section>
 
     <section className="right-section">
-      <NewsSection />
       <button className="play-button">Jouer</button>
       <button className="sessions-button">Voir les sessions</button>
       <button className="leaderboard-button">Classements</button>

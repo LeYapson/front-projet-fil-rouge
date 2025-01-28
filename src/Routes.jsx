@@ -6,6 +6,10 @@ import NotFound from './pages/NotFound/NotFound';
 import SongLibrary from './components/SongLibrary/SongLibrary';
 import SessionList from './components/SessionList/SessionList';
 import AuthPage from './pages/AuthPage/AuthPage';
+import AboutPage from './pages/About/About';
+import FAQPage from './pages/Faq/FaqPage';
+import DonatePage from './pages/Donate/DonatePage';
+import SupportPage from './pages/Support/SupportPage';
 
 const AppRoutes = () => {
   return (
@@ -28,6 +32,18 @@ const AppRoutes = () => {
 
         {/* Page des sessions */}
         <Route path="/quiz" element={<SessionList />} />
+
+        {/* Page à propos */}
+        <Route path="/about" element={<AboutPage />} />
+
+        {/* Page FAQ */}
+        <Route path="/faq" element={<FAQPage />} />
+
+        {/* Page de dons */}
+        <Route path="/donate" element={<DonatePage />} />
+
+        {/* Page de support */}
+        <Route path="/support" element={<SupportPage />} />
 
         {/* Page du lobby */}
       </Routes>
